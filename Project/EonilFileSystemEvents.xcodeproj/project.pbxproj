@@ -26,6 +26,9 @@
 		45DA958A1A69F1610091410B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45DA95881A69F1610091410B /* MainMenu.xib */; };
 		45DA959D1A69F17A0091410B /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970A61A1569090037649F /* EonilFileSystemEvents.framework */; };
 		45DA959E1A69F17A0091410B /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970A61A1569090037649F /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B5E3C7C41C9ACACC0013D17D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3C7C31C9ACACC0013D17D /* AppDelegate.swift */; };
+		B5E3C7C61C9ACACC0013D17D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5E3C7C51C9ACACC0013D17D /* Assets.xcassets */; };
+		B5E3C7C91C9ACACC0013D17D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3C7C71C9ACACC0013D17D /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,11 @@
 		45DA95841A69F1610091410B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45DA95861A69F1610091410B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		45DA95891A69F1610091410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		B5E3C7C11C9ACACC0013D17D /* LocalAppUpdate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalAppUpdate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5E3C7C31C9ACACC0013D17D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5E3C7C51C9ACACC0013D17D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5E3C7C81C9ACACC0013D17D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		B5E3C7CA1C9ACACC0013D17D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5E3C7BE1C9ACACC0013D17D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -146,6 +161,7 @@
 				45D970D81A1569F60037649F /* InternalTester */,
 				45DA95811A69F1610091410B /* InternalTester4 */,
 				45BF99C61A131E3A004E4E2E /* TestdriveApp */,
+				B5E3C7C21C9ACACC0013D17D /* LocalAppUpdate */,
 				45D970C51A1569540037649F /* Frameworks */,
 				45BF99941A130C55004E4E2E /* Products */,
 			);
@@ -158,6 +174,7 @@
 				45D970961A155DD50037649F /* InternalTester */,
 				45D970A61A1569090037649F /* EonilFileSystemEvents.framework */,
 				45DA95801A69F1610091410B /* InternalTester4.app */,
+				B5E3C7C11C9ACACC0013D17D /* LocalAppUpdate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -230,6 +247,17 @@
 				45DA95831A69F1610091410B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5E3C7C21C9ACACC0013D17D /* LocalAppUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				B5E3C7C31C9ACACC0013D17D /* AppDelegate.swift */,
+				B5E3C7C51C9ACACC0013D17D /* Assets.xcassets */,
+				B5E3C7C71C9ACACC0013D17D /* MainMenu.xib */,
+				B5E3C7CA1C9ACACC0013D17D /* Info.plist */,
+			);
+			path = LocalAppUpdate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +349,23 @@
 			productReference = 45DA95801A69F1610091410B /* InternalTester4.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B5E3C7C01C9ACACC0013D17D /* LocalAppUpdate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5E3C7CB1C9ACACC0013D17D /* Build configuration list for PBXNativeTarget "LocalAppUpdate" */;
+			buildPhases = (
+				B5E3C7BD1C9ACACC0013D17D /* Sources */,
+				B5E3C7BE1C9ACACC0013D17D /* Frameworks */,
+				B5E3C7BF1C9ACACC0013D17D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LocalAppUpdate;
+			productName = LocalAppUpdate;
+			productReference = B5E3C7C11C9ACACC0013D17D /* LocalAppUpdate.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -328,7 +373,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Eonil;
 				TargetAttributes = {
@@ -343,6 +388,10 @@
 					};
 					45DA957F1A69F1610091410B = {
 						CreatedOnToolsVersion = 6.1.1;
+					};
+					B5E3C7C01C9ACACC0013D17D = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = A43D9X8EYU;
 					};
 				};
 			};
@@ -363,6 +412,7 @@
 				45D970951A155DD50037649F /* InternalTester */,
 				45DA957F1A69F1610091410B /* InternalTester4 */,
 				45BF99C41A131E3A004E4E2E /* TestdriveApp */,
+				B5E3C7C01C9ACACC0013D17D /* LocalAppUpdate */,
 			);
 		};
 /* End PBXProject section */
@@ -390,6 +440,15 @@
 			files = (
 				45DA95871A69F1610091410B /* Images.xcassets in Resources */,
 				45DA958A1A69F1610091410B /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5E3C7BF1C9ACACC0013D17D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5E3C7C61C9ACACC0013D17D /* Assets.xcassets in Resources */,
+				B5E3C7C91C9ACACC0013D17D /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +491,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5E3C7BD1C9ACACC0013D17D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5E3C7C41C9ACACC0013D17D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -460,6 +527,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				45DA95891A69F1610091410B /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		B5E3C7C71C9ACACC0013D17D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5E3C7C81C9ACACC0013D17D /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -684,6 +759,39 @@
 			};
 			name = Release;
 		};
+		B5E3C7CC1C9ACACC0013D17D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = LocalAppUpdate/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.syncfactory.LocalAppUpdate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B5E3C7CD1C9ACACC0013D17D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = LocalAppUpdate/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.syncfactory.LocalAppUpdate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -731,6 +839,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B5E3C7CB1C9ACACC0013D17D /* Build configuration list for PBXNativeTarget "LocalAppUpdate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5E3C7CC1C9ACACC0013D17D /* Debug */,
+				B5E3C7CD1C9ACACC0013D17D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
