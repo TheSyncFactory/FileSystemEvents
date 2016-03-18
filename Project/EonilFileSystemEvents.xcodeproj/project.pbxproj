@@ -26,6 +26,8 @@
 		45DA958A1A69F1610091410B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45DA95881A69F1610091410B /* MainMenu.xib */; };
 		45DA959D1A69F17A0091410B /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970A61A1569090037649F /* EonilFileSystemEvents.framework */; };
 		45DA959E1A69F17A0091410B /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970A61A1569090037649F /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B5AF00641C9C44EC0060B08D /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970A61A1569090037649F /* EonilFileSystemEvents.framework */; };
+		B5AF00651C9C44EC0060B08D /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970A61A1569090037649F /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B5E3C7C41C9ACACC0013D17D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3C7C31C9ACACC0013D17D /* AppDelegate.swift */; };
 		B5E3C7C61C9ACACC0013D17D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5E3C7C51C9ACACC0013D17D /* Assets.xcassets */; };
 		B5E3C7C91C9ACACC0013D17D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3C7C71C9ACACC0013D17D /* MainMenu.xib */; };
@@ -40,6 +42,13 @@
 			remoteInfo = EonilFileSystemEvents;
 		};
 		45DA959F1A69F17A0091410B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45BF998A1A130C55004E4E2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45D970A51A1569090037649F;
+			remoteInfo = EonilFileSystemEvents;
+		};
+		B5AF00661C9C44EC0060B08D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45BF998A1A130C55004E4E2E /* Project object */;
 			proxyType = 1;
@@ -80,6 +89,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5AF00681C9C44EC0060B08D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B5AF00651C9C44EC0060B08D /* EonilFileSystemEvents.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +126,7 @@
 		45DA95841A69F1610091410B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45DA95861A69F1610091410B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		45DA95891A69F1610091410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		B5AF00631C9C449A0060B08D /* LocalAppUpdate-Briding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LocalAppUpdate-Briding-Header.h"; sourceTree = "<group>"; };
 		B5E3C7C11C9ACACC0013D17D /* LocalAppUpdate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalAppUpdate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3C7C31C9ACACC0013D17D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5E3C7C51C9ACACC0013D17D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -148,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5AF00641C9C44EC0060B08D /* EonilFileSystemEvents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +278,7 @@
 				B5E3C7C51C9ACACC0013D17D /* Assets.xcassets */,
 				B5E3C7C71C9ACACC0013D17D /* MainMenu.xib */,
 				B5E3C7CA1C9ACACC0013D17D /* Info.plist */,
+				B5AF00631C9C449A0060B08D /* LocalAppUpdate-Briding-Header.h */,
 			);
 			path = LocalAppUpdate;
 			sourceTree = "<group>";
@@ -356,10 +379,12 @@
 				B5E3C7BD1C9ACACC0013D17D /* Sources */,
 				B5E3C7BE1C9ACACC0013D17D /* Frameworks */,
 				B5E3C7BF1C9ACACC0013D17D /* Resources */,
+				B5AF00681C9C44EC0060B08D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B5AF00671C9C44EC0060B08D /* PBXTargetDependency */,
 			);
 			name = LocalAppUpdate;
 			productName = LocalAppUpdate;
@@ -385,6 +410,7 @@
 					};
 					45D970A51A1569090037649F = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = A43D9X8EYU;
 					};
 					45DA957F1A69F1610091410B = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -511,6 +537,11 @@
 			isa = PBXTargetDependency;
 			target = 45D970A51A1569090037649F /* EonilFileSystemEvents */;
 			targetProxy = 45DA959F1A69F17A0091410B /* PBXContainerItemProxy */;
+		};
+		B5AF00671C9C44EC0060B08D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45D970A51A1569090037649F /* EonilFileSystemEvents */;
+			targetProxy = B5AF00661C9C44EC0060B08D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -685,7 +716,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -710,7 +741,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -766,12 +797,14 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = LocalAppUpdate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.syncfactory.LocalAppUpdate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LocalAppUpdate/LocalAppUpdate-Briding-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -783,12 +816,14 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = LocalAppUpdate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.syncfactory.LocalAppUpdate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LocalAppUpdate/LocalAppUpdate-Briding-Header.h";
 			};
 			name = Release;
 		};
@@ -847,6 +882,7 @@
 				B5E3C7CD1C9ACACC0013D17D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
