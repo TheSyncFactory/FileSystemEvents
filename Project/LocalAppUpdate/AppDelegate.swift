@@ -10,34 +10,36 @@ import Cocoa
 import EonilFileSystemEvents
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
   @IBOutlet weak var window: NSWindow!
   @IBOutlet weak var sourceButton: NSButton!
+  @IBOutlet weak var sourceField: NSTextField!
   @IBOutlet weak var destinationButton: NSButton!
+  @IBOutlet weak var destinationField: NSTextField!
 
-  var	queue	=	dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
-  let	onEvents	=	{ (events:[FileSystemEvent]) -> () in
-    for ev in events {
-      print("Event: \(ev)")
-    }
-  }
-  var	monitor	=	nil as FileSystemEventMonitor?
- 
-  private var _sourceFolder:String = ""
-  var sourceFolder:String {
+  var sourcePath:String {
     set {
-      _sourceFolder = newValue
-      if self.watchForChanges  {
-        startMonitoring()
-      }
+      self.sourceField.stringValue = newValue
+      NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "LAUSourcePath")
     }
     get {
-      return _sourceFolder
+      return self.sourceField.stringValue
+      
+    }
+  }
+  var destinationPath:String {
+    set {
+      self.destinationField.stringValue = newValue
+      NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "LAUDestinationPath")
+    }
+    get {
+      return self.destinationField.stringValue
     }
   }
   
-  var destinationFolder:String = ""
+  var	queue	=	dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+  var	monitor	=	nil as FileSystemEventMonitor?
  
   var watchForChanges:Bool {
     set {
@@ -52,12 +54,138 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
   
+  func applicationDidFinishLaunching(aNotification: NSNotification) {
+    // Insert code here to initialize your application
+    NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
+    
+    if let sP = NSUserDefaults.standardUserDefaults().valueForKey("LAUSourcePath") {
+      if NSFileManager.defaultManager().fileExistsAtPath(sP as! String) {
+        self.sourcePath = sP as! String
+      }
+    }
+    if let dP = NSUserDefaults.standardUserDefaults().valueForKey("LAUDestinationPath") {
+      if NSFileManager.defaultManager().fileExistsAtPath(dP as! String) {
+        self.destinationPath = dP as! String
+      }
+    }
+  }
+  
+  func applicationWillTerminate(aNotification: NSNotification) {
+    // Insert code here to tear down your application
+  }
+  
+  func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+    return true
+  }
+  
+  func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
+    
+    if notification.activationType == NSUserNotificationActivationType.ActionButtonClicked {
+      if let zipPath = notification.userInfo!["zipPath"] {
+        print("Will kill app and run replace with \(zipPath)")
+        if killApp(self.destinationPath) {
+          if removeOld(self.destinationPath) {
+            let destinationFolderPath = NSURL.fileURLWithPath(self.destinationPath).URLByDeletingLastPathComponent!.path
+            if extractZip(zipPath as? String, toPath: destinationFolderPath) {
+              if runUpdate(self.destinationPath) {
+                print("Update has been installed")
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  func onEvents(events: [FileSystemEvent]) {
+    for ev in events {
+      let sourceURL = NSURL.fileURLWithPath(ev.path)
+      if sourceURL.pathExtension == "zip" {
+        if ev.flag.contains(FileSystemEventFlag.ItemCreated) {
+          // Ask what to do
+          let notification = NSUserNotification()
+          notification.title = "Local update available"
+          notification.informativeText = "Do you want to quit the current app and run the update?"
+          notification.actionButtonTitle = "Update"
+          notification.userInfo = ["zipPath": sourceURL.path!]
+          NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
+        }
+      }
+    }
+  }
+  
+  func killApp(appPath: String?) -> Bool {
+    if let path = appPath {
+      // Check if app is running
+      if let bundle = NSBundle(path: path) {
+        print("Found bundle: \(bundle)")
+        if let identifier = bundle.bundleIdentifier {
+          let apps = NSRunningApplication.runningApplicationsWithBundleIdentifier(identifier)
+          print("Running apps: \(apps)")
+          for runningApp in apps {
+            // Kill if it's the app running at the destination path
+            if runningApp.bundleURL!.path == appPath {
+              print("Terminating \(appPath)")
+              return runningApp.terminate()
+            }
+          }
+        }
+        return true
+      }
+    }
+    return false
+  }
+  
+  func removeOld(appPath: String?) -> Bool {
+    if let path = appPath {
+      if NSFileManager.defaultManager().fileExistsAtPath(path) {
+        do {
+          try NSFileManager.defaultManager().trashItemAtURL(NSURL.fileURLWithPath(path), resultingItemURL: nil)
+          return true
+        } catch let error as NSError {
+          print("Failed to remove item at \(path): \(error)")
+        }
+      } else {
+        return true
+      }
+    }
+    return false
+  }
+  
+  func extractZip(fromPath: String?, toPath: String?) -> Bool {
+    if let from = fromPath {
+      if let to = toPath {
+        print("Extract from \(from) to \(to)")
+        let task = NSTask()
+        task.launchPath = "/usr/bin/unzip"
+        task.arguments = ["-qou", from, "-d", to]
+        task.launch()
+        task.waitUntilExit()
+        return task.terminationStatus == EXIT_SUCCESS
+      }
+    }
+    return false
+  }
+  
+  func runUpdate(destinationPath: String?) -> Bool {
+    if let path = destinationPath {
+      print("Run at \(path)")
+      do {
+        try NSWorkspace.sharedWorkspace().launchApplicationAtURL(NSURL.fileURLWithPath(path), options: NSWorkspaceLaunchOptions.Default, configuration: [NSWorkspaceLaunchConfigurationArguments: []])
+      } catch let error as NSError {
+        print("Failed to launch application at \(path): \(error)")
+      }
+      return true
+    }
+    return false
+  }
+  
   func startMonitoring() -> Bool {
     stopMonitoring()
     
-    let path = self.sourceFolder
+    let path = self.sourcePath
     if path.characters.count > 0 {
-      self.monitor = FileSystemEventMonitor(pathsToWatch: [path], latency: 0, watchRoot: false, queue: self.queue, callback:self.onEvents)
+      self.monitor = FileSystemEventMonitor(pathsToWatch: [path], latency: 0, watchRoot: false, queue: self.queue, callback:onEvents)
       if self.monitor != nil {
         return true
       }
@@ -68,14 +196,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.monitor = nil
   }
   
-  func applicationDidFinishLaunching(aNotification: NSNotification) {
-    // Insert code here to initialize your application
+  @IBAction func browse(sender: NSButton) {
     
-
-  }
-
-  func applicationWillTerminate(aNotification: NSNotification) {
-    // Insert code here to tear down your application
+    let openPanel = NSOpenPanel()
+    openPanel.allowsMultipleSelection = false
+    if sender == self.sourceButton {
+      openPanel.canChooseDirectories = true
+      openPanel.canChooseFiles = false
+    } else if (sender == self.destinationButton) {
+      openPanel.canChooseDirectories = false
+      openPanel.canChooseFiles = true
+      openPanel.allowedFileTypes = ["app"]
+    }
+    openPanel.beginSheetModalForWindow(self.window, completionHandler: { (result) -> Void in
+      if result == NSFileHandlingPanelOKButton {
+        
+        if sender == self.sourceButton {
+         
+          if let URL = openPanel.URL {
+            self.sourcePath = URL.path!
+          }
+        } else if (sender == self.destinationButton) {
+          
+          if let URL = openPanel.URL {
+            self.destinationPath = URL.path!
+          }
+        }
+      }
+    })
   }
   
   @IBAction func switchMonitoring(sender: NSButton) {
@@ -91,6 +239,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     }
   }
-
 }
 
